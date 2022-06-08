@@ -14,17 +14,19 @@ pub fn build(b: *Builder) void {
     glfw.link(b, exe, .{});
 
     exe.addCSourceFiles(&[_][]const u8 {
-        "deps/imgui/imgui.cpp",
-        "deps/imgui/imgui_draw.cpp",
-        "deps/imgui/imgui_tables.cpp",
-        "deps/imgui/imgui_widgets.cpp",
-        "deps/imgui/imgui_demo.cpp",
-        "deps/imgui/cimgui/imgui_impl_glfw.cpp",
-        "deps/imgui/cimgui/imgui_impl_opengl3.cpp",
-        "deps/imgui/cimgui/cimgui.cpp",
+        "deps/cimgui/imgui/imgui.cpp",
+        "deps/cimgui/imgui/imgui_draw.cpp",
+        "deps/cimgui/imgui/imgui_tables.cpp",
+        "deps/cimgui/imgui/imgui_widgets.cpp",
+        "deps/cimgui/imgui/imgui_demo.cpp",
+        "deps/cimgui/imgui/backends/imgui_impl_glfw.cpp",
+        "deps/cimgui/imgui/backends/imgui_impl_opengl3.cpp",
+        "deps/cimgui/cimgui.cpp",
         }, &[_][]const u8 {});
     exe.linkLibCpp();
-    exe.addIncludeDir("deps/imgui");
+    exe.addIncludeDir("deps");
+    exe.addIncludeDir("deps/cimgui");
+    exe.addIncludeDir("deps/cimgui/imgui");
 
     exe.install();
     b.default_step.dependOn(&exe.step);
