@@ -19,6 +19,8 @@ pub fn main() !void {
     var context: *c.ImGuiContext = undefined;
     var io: *c.ImGuiIO = undefined;
     {
+        std.debug.print("imgui version: {s}\n", .{c.igGetVersion()});
+
         try glfw.init(glfw.InitHints{});
 
         window = try glfw.Window.create(
@@ -29,13 +31,14 @@ pub fn main() !void {
             null,
             glfw.Window.Hints{
                 .context_version_major = 3,
-                .context_version_minor = 0,
+                .context_version_minor = 2,
+                .opengl_profile = .opengl_core_profile,
+                .opengl_forward_compat = true
         });
 
         try glfw.makeContextCurrent(window);
         try glfw.swapInterval(1); // vsync
 
-        std.debug.print("imgui version: {s}\n", .{c.igGetVersion()});
         context = c.igCreateContext(null);
 
         theme.setImguiTheme(&c.igGetStyle().*.Colors);
@@ -44,7 +47,7 @@ pub fn main() !void {
             std.debug.panic("", .{});
         }
 
-        const glsl_version = "#version 130";
+        const glsl_version = "#version 150";
         if (!c.ImGui_ImplOpenGL3_Init(glsl_version)) {
             std.debug.panic("could not init opengl", .{});
         }
