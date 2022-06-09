@@ -19,8 +19,8 @@ pub fn build(b: *Builder) void {
         "deps/cimgui/imgui/imgui_tables.cpp",
         "deps/cimgui/imgui/imgui_widgets.cpp",
         "deps/cimgui/imgui/imgui_demo.cpp",
-        "deps/cimgui/imgui/backends/imgui_impl_glfw.cpp",
-        "deps/cimgui/imgui/backends/imgui_impl_opengl3.cpp",
+        "deps/imgui_backend/imgui_impl_glfw.cpp",
+        "deps/imgui_backend/imgui_impl_opengl3.cpp",
         "deps/cimgui/cimgui.cpp",
         }, &[_][]const u8 {});
     exe.linkLibCpp();
